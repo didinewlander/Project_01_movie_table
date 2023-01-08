@@ -1,15 +1,19 @@
 const express = require('express');
+require("dotenv").config();
 const cors = require('cors');
 const connectDB = require('./Configs/db');
 const movieRouter = require('./Routers/movieRouter');
 
 const app = express();
-const port = 8000;
-
-connectDB();
-
 app.use(cors());
 app.use(express.json());
+
+
+const port = 8000;
+const uri = process.env.MONGODB_CONNECTION_STRING;
+
+connectDB(uri);
+
 app.use(express.urlencoded({ extended: true}));
 app.use('/movies', movieRouter);
 app.get('/', function (req, res) {

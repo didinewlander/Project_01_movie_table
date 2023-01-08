@@ -1,2 +1,4 @@
 /.vscode
 /DAL
+/.env
+/node_modules

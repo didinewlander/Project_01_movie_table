@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
-mongoose.set('strictQuery',false);
-const connectDB = ()=>{
-    mongoose.connect('mongodb://127.0.0.1:27017/moviesDB')
-    .then(()=> console.log('Connected to moviesDB'))
-    .catch((error)=> console.log(error));
-}
 
+mongoose.set('strictQuery', false);
+const connectDB = (uri) => {
+    mongoose.connect(uri)
+        .then(() => console.log('Connected to moviesDB'))
+        .catch((error) => console.log(error));
+}
+const connection = mongoose.connection;
+connection.once("open", () =>
+    console.log('connetion established')
+ )
 module.exports = connectDB;
